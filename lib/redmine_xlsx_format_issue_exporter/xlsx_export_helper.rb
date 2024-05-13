@@ -6,6 +6,7 @@ module RedmineXlsxFormatIssueExporter
     def query_to_xlsx(items, query, options={})
       columns = query.columns
       extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
+      extra_columns_size = extra_columns.size
       columns = extra_columns + columns
 
 
