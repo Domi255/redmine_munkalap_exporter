@@ -51,7 +51,8 @@ module RedmineXlsxFormatIssueExporter
             # EXTRA COLUMNS DATA
             value = "Extra data #{column_index + 1}"
           else
-          value = xlsx_content(c, item)
+            column_name = c.is_a?(String) ? c : c.name
+            value = xlsx_content(column_name, item)
           end
           write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
 
