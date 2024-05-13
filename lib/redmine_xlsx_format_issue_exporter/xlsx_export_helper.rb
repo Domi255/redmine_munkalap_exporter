@@ -4,29 +4,25 @@ module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
 
     def query_to_xlsx(items, query, options={})
-  columns = query.columns
-  extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
-  extra_columns_size = extra_columns.size
-  columns = extra_columns + columns
+      columns = query.columns
 
-  stream = StringIO.new('')
-  workbook = WriteXLSX.new(stream)
-  worksheet = workbook.add_worksheet
+      stream = StringIO.new('')
+      workbook = WriteXLSX.new(stream)
+      worksheet = workbook.add_worksheet
 
-  worksheet.freeze_panes(1, 1)  # Freeze header row and # column.
+      worksheet.freeze_panes(1, 1)  # Freeze header row and # column.
 
-  columns_width = []
-  write_header_row(workbook, worksheet, columns, columns_width)
-  write_item_rows(workbook, worksheet, columns, items, columns_width, extra_columns_size)
-  columns.size.times do |index|
-    worksheet.set_column(index, index, columns_width[index])
-  end
+      columns_width = []
+      write_header_row(workbook, worksheet, columns, columns_width)
+      write_item_rows(workbook, worksheet, columns, items, columns_width)
+      columns.size.times do |index|
+        worksheet.set_column(index, index, columns_width[index])
+      end
 
-  workbook.close
+      workbook.close
 
-  stream.string
-end
-
+      stream.string
+    end
 
     def write_header_row(workbook, worksheet, columns, columns_width)
       header_format = create_header_format(workbook)
@@ -42,19 +38,13 @@ end
       end
     end
 
-    def write_item_rows(workbook, worksheet, columns, items, columns_width, extra_columns_size)
+    def write_item_rows(workbook, worksheet, columns, items, columns_width)
       hyperlink_format = create_hyperlink_format(workbook)
       cell_format = create_cell_format(workbook)
       items.each_with_index do |item, item_index|
         columns.each_with_index do |c, column_index|
-          if column_index < extra_columns_size
-            # EXTRA COLUMNS DATA
-            value = "Extra data #{column_index + 1}"
-          else
-            column_name = c.is_a?(String) ? c : c.name
-            value = xlsx_content(column_name, item)
-          end
-          write_item(worksheet, value, item_index, column_index, cell_format, (column_name == :id), item.id, hyperlink_format)
+          value = xlsx_content(c, item)
+          write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
 
           width = get_column_width(value)
           columns_width[column_index] = width if columns_width[column_index] < width
@@ -63,11 +53,7 @@ end
     end
 
     def xlsx_content(column, item)
-      if column == :id
-        item.id
-      else
       csv_content(column, item)
-      end
     end
 
     # Conditions from worksheet.rb in write_xlsx.
@@ -92,7 +78,6 @@ end
     def write_item(worksheet, value, row_index, column_index, cell_format, is_id_column, id, hyperlink_format)
       if is_id_column
         issue_url = url_for(:controller => 'issues', :action => 'show', :id => id)
-        value = value.to_s
         worksheet.write(row_index + 1, column_index, issue_url, hyperlink_format, value)
         return
       end
