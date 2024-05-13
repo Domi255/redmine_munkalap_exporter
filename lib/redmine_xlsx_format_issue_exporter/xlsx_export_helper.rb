@@ -63,7 +63,11 @@ module RedmineXlsxFormatIssueExporter
     end
 
     def xlsx_content(column, item)
+      if column == :id
+        item.id
+      else
       csv_content(column, item)
+      end
     end
 
     # Conditions from worksheet.rb in write_xlsx.
