@@ -13,14 +13,16 @@ module RedmineXlsxFormatIssueExporter
       columns_width = []
 
       # Column headers
+      extra_headers = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
       headers =
         report.criteria.collect do |criteria|
           l_or_humanize(report.available_criteria[criteria][:label])
         end
       headers += report.periods
       headers << l(:label_total_time)
+      headers = extra_headers + headers
 
-      start_period_index = headers.count
+      start_period_index = headers.count + 7
       worksheet.freeze_panes(1, start_period_index)  # Freeze header row and criteria column.
       write_header_row(workbook, worksheet, headers, columns_width)
 
@@ -54,7 +56,7 @@ module RedmineXlsxFormatIssueExporter
       hours.collect {|h| h[criteria[level]].to_s}.uniq.each do |value|
         hours_for_value = select_hours(hours, criteria[level], value)
         next if hours_for_value.empty?
-        row = [''] * level
+        row = [''] * (level + 7)
         row << format_criteria_value(available_criteria[criteria[level]], value, false).to_s
         row += [''] * (criteria.length - level - 1)
         total = 0
@@ -79,7 +81,8 @@ module RedmineXlsxFormatIssueExporter
       info_format = create_cell_format(workbook)
       period_format = create_period_format(workbook)
       row.each_with_index do |value, column_index|
-        if column_index < start_period_index
+        adjusted_column_index = column_index + 7
+        if adjusted_column_index < start_period_index
           cell_format = info_format
         else
           cell_format = period_format
