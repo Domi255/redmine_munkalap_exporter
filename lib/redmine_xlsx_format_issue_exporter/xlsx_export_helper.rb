@@ -54,7 +54,7 @@ module RedmineXlsxFormatIssueExporter
             column_name = c.is_a?(String) ? c : c.name
             value = xlsx_content(column_name, item)
           end
-          write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
+          write_item(worksheet, value, item_index, column_index, cell_format, (column_name == :id), item.id, hyperlink_format)
 
           width = get_column_width(value)
           columns_width[column_index] = width if columns_width[column_index] < width
