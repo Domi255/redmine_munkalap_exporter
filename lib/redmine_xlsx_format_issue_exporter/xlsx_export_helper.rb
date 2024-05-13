@@ -92,6 +92,7 @@ module RedmineXlsxFormatIssueExporter
     def write_item(worksheet, value, row_index, column_index, cell_format, is_id_column, id, hyperlink_format)
       if is_id_column
         issue_url = url_for(:controller => 'issues', :action => 'show', :id => id)
+        value = value.to_s
         worksheet.write(row_index + 1, column_index, issue_url, hyperlink_format, value)
         return
       end
