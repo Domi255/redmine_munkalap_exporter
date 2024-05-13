@@ -5,6 +5,9 @@ module RedmineXlsxFormatIssueExporter
 
     def query_to_xlsx(items, query, options={})
       columns = query.columns
+      extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
+      columns = extra_columns + columns
+
 
       stream = StringIO.new('')
       workbook = WriteXLSX.new(stream)
@@ -14,7 +17,7 @@ module RedmineXlsxFormatIssueExporter
 
       columns_width = []
       write_header_row(workbook, worksheet, columns, columns_width)
-      write_item_rows(workbook, worksheet, columns, items, columns_width)
+      write_item_rows(workbook, worksheet, columns, items, columns_width, extra_columns_size)
       columns.size.times do |index|
         worksheet.set_column(index, index, columns_width[index])
       end
@@ -38,12 +41,17 @@ module RedmineXlsxFormatIssueExporter
       end
     end
 
-    def write_item_rows(workbook, worksheet, columns, items, columns_width)
+    def write_item_rows(workbook, worksheet, columns, items, columns_width, extra_columns_size)
       hyperlink_format = create_hyperlink_format(workbook)
       cell_format = create_cell_format(workbook)
       items.each_with_index do |item, item_index|
         columns.each_with_index do |c, column_index|
+          if column_index < extra_columns_size
+            # EXTRA COLUMNS DATA
+            value = "Extra data #{column_index + 1}"
+          else
           value = xlsx_content(c, item)
+          end
           write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
 
           width = get_column_width(value)
