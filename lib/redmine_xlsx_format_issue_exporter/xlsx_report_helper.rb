@@ -9,9 +9,9 @@ module RedmineXlsxFormatIssueExporter
       stream = StringIO.new('')
       workbook = WriteXLSX.new(stream)
       worksheet = workbook.add_worksheet
-
+    
       columns_width = []
-
+    
       # Column headers
       extra_headers = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
       headers =
@@ -21,15 +21,15 @@ module RedmineXlsxFormatIssueExporter
       headers += report.periods
       headers << l(:label_total_time)
       headers = extra_headers + headers
-
+    
       start_period_index = headers.count + 7
       worksheet.freeze_panes(1, start_period_index)  # Freeze header row and criteria column.
       write_header_row(workbook, worksheet, headers, columns_width)
-
+    
       # Content
       row_index = 0
       row_index = report_criteria_to_xlsx(workbook, worksheet, row_index, start_period_index, columns_width,report.available_criteria, report.columns, report.criteria, report.periods, report.hours)
-
+    
       # Total row
       str_total = l(:label_total_time)
       row = [ str_total ] + [''] * (report.criteria.size - 1)
@@ -42,15 +42,16 @@ module RedmineXlsxFormatIssueExporter
       row << total
       write_item_row(workbook, worksheet, row, row_index, start_period_index, columns_width)
       row_index += 1
-
+    
       headers.size.times do |index|
         worksheet.set_column(index, index, columns_width[index])
       end
-
+    
       workbook.close
-
+    
       stream.string
     end
+    
 
     def report_criteria_to_xlsx(workbook, worksheet, row_index, start_period_index, columns_width, available_criteria, columns, criteria, periods, hours, level=0)
       hours.collect {|h| h[criteria[level]].to_s}.uniq.each do |value|

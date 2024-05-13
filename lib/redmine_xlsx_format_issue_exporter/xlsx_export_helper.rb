@@ -4,29 +4,29 @@ module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
 
     def query_to_xlsx(items, query, options={})
-      columns = query.columns
-      extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
-      extra_columns_size = extra_columns.size
-      columns = extra_columns + columns
+  columns = query.columns
+  extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
+  extra_columns_size = extra_columns.size
+  columns = extra_columns + columns
 
+  stream = StringIO.new('')
+  workbook = WriteXLSX.new(stream)
+  worksheet = workbook.add_worksheet
 
-      stream = StringIO.new('')
-      workbook = WriteXLSX.new(stream)
-      worksheet = workbook.add_worksheet
+  worksheet.freeze_panes(1, 1)  # Freeze header row and # column.
 
-      worksheet.freeze_panes(1, 1)  # Freeze header row and # column.
+  columns_width = []
+  write_header_row(workbook, worksheet, columns, columns_width)
+  write_item_rows(workbook, worksheet, columns, items, columns_width, extra_columns_size)
+  columns.size.times do |index|
+    worksheet.set_column(index, index, columns_width[index])
+  end
 
-      columns_width = []
-      write_header_row(workbook, worksheet, columns, columns_width)
-      write_item_rows(workbook, worksheet, columns, items, columns_width, extra_columns_size)
-      columns.size.times do |index|
-        worksheet.set_column(index, index, columns_width[index])
-      end
+  workbook.close
 
-      workbook.close
+  stream.string
+end
 
-      stream.string
-    end
 
     def write_header_row(workbook, worksheet, columns, columns_width)
       header_format = create_header_format(workbook)
