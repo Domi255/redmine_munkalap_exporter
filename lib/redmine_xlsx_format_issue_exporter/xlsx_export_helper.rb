@@ -50,16 +50,21 @@ end
     def write_item_rows(workbook, worksheet, columns, items, columns_width)
       hyperlink_format = create_hyperlink_format(workbook)
       cell_format = create_cell_format(workbook)
+      
+      # Skip the first 7 columns
+      columns_to_process = columns[7..-1] || []
+    
       items.each_with_index do |item, item_index|
-        columns.each_with_index do |c, column_index|
+        columns_to_process.each_with_index do |c, column_index|
           value = xlsx_content(c, item)
           write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
-
+    
           width = get_column_width(value)
           columns_width[column_index] = width if columns_width[column_index] < width
         end
       end
     end
+    
 
     def xlsx_content(column, item)
       csv_content(column, item)
