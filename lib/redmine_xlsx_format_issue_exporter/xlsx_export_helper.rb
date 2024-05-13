@@ -24,7 +24,7 @@ module RedmineXlsxFormatIssueExporter
   write_item_rows(workbook, worksheet, columns, items, columns_width)
 
   columns.size.times do |index|
-    worksheet.set_column(index, index, columns_width[index])
+    worksheet.set_column(index + 7, index + 7, columns_width[index])
   end
 
   workbook.close
@@ -57,7 +57,7 @@ end
       items.each_with_index do |item, item_index|
         columns_to_process.each_with_index do |c, column_index|
           value = xlsx_content(c, item)
-          write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
+          write_item(worksheet, value, item_index, column_index + 7, cell_format, (c.name == :id), item.id, hyperlink_format)
     
           width = get_column_width(value)
           columns_width[column_index] = width if columns_width[column_index] < width
