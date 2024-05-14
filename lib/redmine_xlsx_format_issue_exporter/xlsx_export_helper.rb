@@ -57,36 +57,36 @@ end
       items.each_with_index do |item, item_index|
         columns_to_process.each_with_index do |c, column_index|
           if column_index == 0
-            custom_data = "=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0);1;0)"
+            custom_data = '=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0);1;0)'
           end
           if column_index == 1
-            custom_data = "=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Ragasztó eltáv. oszlopszám"";$1:$1;0);4);""1"";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Matrica típusa"";$1:$1;0);4);""1"";"") & SOR())=""bármelyik ragasztóeltávolítással"";INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Matricázás oszlopszám"";$1:$1;0);4);""1"";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Ragasztó eltáv. oszlopszám"";$1:$1;0);4);""1"";"") & SOR()))"
+            custom_data = '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") & SOR())="bármelyik ragasztóeltávolítással";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR()))'
           end
           if column_index == 2
-            custom_data = "=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Hátfal oszlopszám"";$1:$1;0);4);""1"";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Matrica típusa"";$1:$1;0);4);""1"";"") & SOR())=""hát ragasztóeltávolítás nélkül"";INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Matricázás oszlopszám"";$1:$1;0);4);""1"";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Hátfal oszlopszám"";$1:$1;0);4);""1"";"") & SOR()))"
+            custom_data = '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hátfal oszlopszám";$1:$1;0);4);"1";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") & SOR())="hát ragasztóeltávolítás nélkül";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hátfal oszlopszám";$1:$1;0);4);"1";"") & SOR()))'
           end
           if column_index == 3
-            custom_data = "=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Elő- és oldalfal oszlopszám"";$1:$1;0);4);""1"";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Matrica típusa"";$1:$1;0);4);""1"";"") & SOR())=""elő és oldal ragasztóeltávolítás nélkül"";INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Matricázás oszlopszám"";$1:$1;0);4);""1"";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Elő- és oldalfal oszlopszám"";$1:$1;0);4);""1"";"") & SOR()))"
+            custom_data = '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elő- és oldalfal oszlopszám";$1:$1;0);4);"1";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") & SOR())="elő és oldal ragasztóeltávolítás nélkül";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elő- és oldalfal oszlopszám";$1:$1;0);4);"1";"") & SOR()))'
           end
           if column_index == 4
-            custom_data = "=@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Megérkezés km óraállás"";$1:$1;0);4);""1"";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Induló km óraállás"";$1:$1;0);4);""1"";"") & SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Hazaérkezés km óraállás"";$1:$1;0);4);""1"";"") & SOR())>0;@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Hazaérkezés km óraállás"";$1:$1;0);4);""1"";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Induló km óraállás"";$1:$1;0);4);""1"";"") & SOR()))-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Kitérő hossza"";$1:$1;0);4);""1"";"") & SOR())"
+            custom_data = '=@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés km óraállás";$1:$1;0);4);"1";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Induló km óraállás";$1:$1;0);4);"1";"") & SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés km óraállás";$1:$1;0);4);"1";"") & SOR())>0;@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés km óraállás";$1:$1;0);4);"1";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Induló km óraállás";$1:$1;0);4);"1";"") & SOR()))-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő hossza";$1:$1;0);4);"1";"") & SOR())'
           end
           if column_index == 5
-            custom_data = "=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Megérkezés időpontja"";$1:$1;0);4);""1"";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Elindulás időpontja"";$1:$1;0);4);""1"";"") & SOR()))*24*60-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Kitérő ideje"";$1:$1;0);4);""1"";"") & SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Hazaérkezés időpontja"";$1:$1;0);4);""1"";"") & SOR())<>"";(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Hazaérkezés időpontja"";$1:$1;0);4);""1"";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Munkavégzés befejezése"";$1:$1;0);4);""1"";"") & SOR()))*24*60);0)"
+            custom_data = '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elindulás időpontja";$1:$1;0);4);"1";"") & SOR()))*24*60-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő ideje";$1:$1;0);4);"1";"") & SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") & SOR())<>"";(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") & SOR()))*24*60);0)'
           end
           if column_index == 6
-            custom_data = "=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Munkavégzés befejezése"";$1:$1;0);4);""1"";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(""Megérkezés időpontja"";$1:$1;0);4);""1"";"") & SOR()))*24*60;0)"
+            custom_data = '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") & SOR()))*24*60;0)'
           end
           if column_index < 7
             write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
             width = get_column_width(custom_data)
           else
           value = xlsx_content(c, item)
-          write_item(worksheet, value, item_index, column_index + 7, cell_format, (c.name == :id), item.id, hyperlink_format)
+          write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
     
           width = get_column_width(value)
           end
-          columns_width[column_index + 7] = width if columns_width[column_index + 7] < width
+          columns_width[column_index] = width if columns_width[column_index] < width
         end
       end
     end
