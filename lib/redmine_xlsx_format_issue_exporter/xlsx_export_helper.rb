@@ -81,7 +81,7 @@ end
             write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
             width = get_column_width(custom_data)
           else
-          value = xlsx_content(c, item)
+          value = xlsx_content(c-7, item)
           write_item(worksheet, value, item_index, column_index, cell_format, (c.name == :id), item.id, hyperlink_format)
     
           width = get_column_width(value)
