@@ -60,11 +60,10 @@ end
       items.each_with_index do |item, item_index|
         custom_columns.each_with_index do |c, column_index|
           if column_index == 0
-            custom_data = 'anya' #'=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0);1;0)'
-          
+            custom_data = '=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0);1;0)'
           elsif column_index == 1
-            custom_data = '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") & SOR())="bármelyik ragasztóeltávolítással";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR()))'
-          
+            custom_data = '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);\"1\";\"\") & SOR())=\"\";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);\"1\";\"\") & SOR())=\"bármelyik ragasztóeltávolítással\";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);\"1\";\"\") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);\"1\";\"\") & SOR()))'
+                    
           elsif column_index == 2
             custom_data = '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hátfal oszlopszám";$1:$1;0);4);"1";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") & SOR())="hát ragasztóeltávolítás nélkül";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hátfal oszlopszám";$1:$1;0);4);"1";"") & SOR()))'
           
