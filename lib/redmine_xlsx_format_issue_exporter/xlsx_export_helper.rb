@@ -64,11 +64,11 @@ end
           when 0
             "Tesztszöveg @ = 1"
           when 1
-            '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") & SOR())="bármelyik ragasztóeltávolítással";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR()))'
+            "=1+1"
           when 2
-            '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hátfal oszlopszám";$1:$1;0);4);"1";"") &amp; SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") &amp; SOR())="hát ragasztóeltávolítás nélkül";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") &amp; SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hátfal oszlopszám";$1:$1;0);4);"1";"") &amp; SOR()))'
+           '="Hello" @ " World"'
           when 3
-            '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elő- és oldalfal oszlopszám";$1:$1;0);4);"1";"") &amp; SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") &amp; SOR())="elő és oldal ragasztóeltávolítás nélkül";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") &amp; SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elő- és oldalfal oszlopszám";$1:$1;0);4);"1";"") &amp; SOR()))'
+           "=A1+B1"
           when 4
             '=@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés km óraállás";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Induló km óraállás";$1:$1;0);4);"1";"") &amp; SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés km óraállás";$1:$1;0);4);"1";"") &amp; SOR())&gt;0;@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés km óraállás";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Induló km óraállás";$1:$1;0);4);"1";"") &amp; SOR()))-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő hossza";$1:$1;0);4);"1";"") &amp; SOR())'
           when 5
