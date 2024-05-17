@@ -62,7 +62,7 @@ end
           
           custom_data = case column_index
           when 0
-            '=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0), 1, 0)'
+            '=IF(AND(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0), 1, 0)'
           when 1
             "0"
           when 2
