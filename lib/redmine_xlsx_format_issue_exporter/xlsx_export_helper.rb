@@ -66,11 +66,11 @@ end
           when 1
             "=1+1"
           when 2
-           '="Hello" @ " World"'
+           '="Hello"'
           when 3
-           "=A1+B1"
+           '="Hello" & A2'
           when 4
-            '=@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés km óraállás";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Induló km óraállás";$1:$1;0);4);"1";"") &amp; SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés km óraállás";$1:$1;0);4);"1";"") &amp; SOR())&gt;0;@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés km óraállás";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Induló km óraállás";$1:$1;0);4);"1";"") &amp; SOR()))-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő hossza";$1:$1;0);4);"1";"") &amp; SOR())'
+            '="Hello & "World"'
           when 5
             '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elindulás időpontja";$1:$1;0);4);"1";"") &amp; SOR()))*24*60-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő ideje";$1:$1;0);4);"1";"") &amp; SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())&lt;&gt;"";(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") &amp; SOR()))*24*60);0)'
           when 6
