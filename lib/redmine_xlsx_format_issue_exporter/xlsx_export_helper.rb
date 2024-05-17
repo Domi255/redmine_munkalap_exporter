@@ -62,7 +62,7 @@ end
           
           custom_data = case column_index
           when 0
-            "=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0);1;0)"
+            "Tesztszöveg @ = 1"
           when 1
             '=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR())="";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matrica típusa";$1:$1;0);4);"1";"") & SOR())="bármelyik ragasztóeltávolítással";INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Matricázás oszlopszám";$1:$1;0);4);"1";"") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Ragasztó eltáv. oszlopszám";$1:$1;0);4);"1";"") & SOR()))'
           when 2
