@@ -62,7 +62,7 @@ end
           
           custom_data = case column_index
           when 0
-            worksheet.add_cell(item_index, column_index, formula: 'HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0), 1, 0)')
+            '=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0), 1, 0)'
           when 1
             "0"
           when 2
@@ -80,9 +80,9 @@ end
         #    '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR()))*24*60;0)'
           end
           
-            #write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
-            #width = get_column_width(custom_data)
-            #columns_width[column_index] = width if columns_width[column_index] < width
+            write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
+            width = get_column_width(custom_data)
+            columns_width[column_index] = width if columns_width[column_index] < width
         end
 
         current_column_index = custom_columns.size
