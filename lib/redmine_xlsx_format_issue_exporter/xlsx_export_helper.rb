@@ -62,15 +62,15 @@ end
           
           custom_data = case column_index
           when 0
-            "=HA(ÉS(B2=0;C2=0;D2=0;E2=0;F2=0;G2=0);1;0)"
+            "=HA(ÉS(B2=0;C2=0;D2=0);1;0)"
           when 1
-            "=1+1"
+            "0"
           when 2
-           '="Hello"'
+           "1"
           when 3
-           '="Hello" & A2'
+           "1"
           when 4
-            "=\"Hello\" & \" World\""
+        #    "=\"Hello\" & \" World\""
         #  when 5
         #    '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elindulás időpontja";$1:$1;0);4);"1";"") &amp; SOR()))*24*60-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő ideje";$1:$1;0);4);"1";"") &amp; SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())&lt;&gt;"";(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") &amp; SOR()))*24*60);0)'
         #  when 6
