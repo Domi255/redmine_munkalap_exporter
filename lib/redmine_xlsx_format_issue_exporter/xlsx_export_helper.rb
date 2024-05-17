@@ -70,7 +70,7 @@ end
           when 3
            '="Hello" & A2'
           when 4
-            %q(="Hello & "World")
+            "=\"Hello\" & \" World\""
         #  when 5
         #    '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elindulás időpontja";$1:$1;0);4);"1";"") &amp; SOR()))*24*60-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő ideje";$1:$1;0);4);"1";"") &amp; SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())&lt;&gt;"";(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") &amp; SOR()))*24*60);0)'
         #  when 6
