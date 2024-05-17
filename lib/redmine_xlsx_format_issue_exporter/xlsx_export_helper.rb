@@ -66,18 +66,15 @@ end
           when 1
             "=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Ragasztó eltáv. oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR())=\"\";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Matrica típusa\";$1:$1;0);4);\"1\";\"\") & SOR())=\"bármelyik ragasztóeltávolítással\";INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Matricázás oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Ragasztó eltáv. oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR()))"
           when 2
-           "1"
+           "=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Hátfal oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR())=\"\";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Matrica típusa\";$1:$1;0);4);\"1\";\"\") & SOR())=\"hát ragasztóeltávolítás nélkül\";INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Matricázás oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Hátfal oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR()))"
           when 3
-           "1"
+           "=@HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Elő- és oldalfal oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR())=\"\";HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Matrica típusa\";$1:$1;0);4);\"1\";\"\") & SOR())=\"elő és oldal ragasztóeltávolítás nélkül\";INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Matricázás oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR()););INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Elő- és oldalfal oszlopszám\";$1:$1;0);4);\"1\";\"\") & SOR()))"
           when 4
-            0
-        #    "=\"Hello\" & \" World\""
+            "=@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Megérkezés km óraállás\";$1:$1;0);4);\"1\";\"\") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Induló km óraállás\";$1:$1;0);4);\"1\";\"\") & SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Hazaérkezés km óraállás\";$1:$1;0);4);\"1\";\"\") & SOR())>0;@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Hazaérkezés km óraállás\";$1:$1;0);4);\"1\";\"\") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Induló km óraállás\";$1:$1;0);4);\"1\";\"\") & SOR()))-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Kitérő hossza\";$1:$1;0);4);\"1\";\"\") & SOR())"
           when 5
-            0
-        #    '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Elindulás időpontja";$1:$1;0);4);"1";"") &amp; SOR()))*24*60-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Kitérő ideje";$1:$1;0);4);"1";"") &amp; SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())&lt;&gt;"";(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Hazaérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") &amp; SOR()))*24*60);0)'
+            "=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Megérkezés időpontja\";$1:$1;0);4);\"1\";\"\") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Elindulás időpontja\";$1:$1;0);4);\"1\";\"\") & SOR()))*24*60-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Kitérő ideje\";$1:$1;0);4);\"1\";\"\") & SOR())+HA(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Hazaérkezés időpontja\";$1:$1;0);4);\"1\";\"\") & SOR())<>\"\";(@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Hazaérkezés időpontja\";$1:$1;0);4);\"1\";\"\") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Munkavégzés befejezése\";$1:$1;0);4);\"1\";\"\") & SOR()))*24*60);0)"
           when 6
-            0
-        #    '=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Munkavégzés befejezése";$1:$1;0);4);"1";"") &amp; SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN("Megérkezés időpontja";$1:$1;0);4);"1";"") &amp; SOR()))*24*60;0)'
+            "=KEREK.FEL((@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Munkavégzés befejezése\";$1:$1;0);4);\"1\";\"\") & SOR())-@INDIREKT(HELYETTE(CÍM(1;HOL.VAN(\"Megérkezés időpontja\";$1:$1;0);4);\"1\";\"\") & SOR()))*24*60;0)"
           end
           
             write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
