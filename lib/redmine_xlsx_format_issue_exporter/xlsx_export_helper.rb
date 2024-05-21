@@ -21,6 +21,7 @@ module RedmineXlsxFormatIssueExporter
   write_header_row(workbook, worksheet, columns, columns_width)
 
   # Write item rows with extra columns
+  row_number = 2
   write_item_rows(workbook, worksheet, columns, items, columns_width)
 
   columns.size.times do |index|
@@ -56,13 +57,15 @@ end
       original_columns = columns[7..-1] || []
       
 
-
+      row_number = 1
       items.each_with_index do |item, item_index|
+        row_number += 1
         custom_columns.each_with_index do |c, column_index|
           
           custom_data = case column_index
           when 0
-            "=IF(AND(B2=0,C2=0,D2=0,E2=0,F2=0,G2=0),1,0)"
+            
+            "=IF(AND(B#{row_number}=0,C#{row_number}=0,D#{row_number}=0,E#{row_number}=0,F#{row_number}=0,G#{row_number}=0),1,0)"
           when 1
             "=IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Ragasztó eltáv. oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW())=\"\",IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matrica típusa\",$1:$1,0),4),\"1\",\"\") & ROW())=\"bármelyik ragasztóeltávolítással\",INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matricázás oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()),),INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Ragasztó eltáv. oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()))"
           when 2
