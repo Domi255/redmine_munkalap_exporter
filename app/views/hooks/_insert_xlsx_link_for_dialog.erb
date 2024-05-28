@@ -1,13 +1,15 @@
 <script type="text/javascript">
     //<![CDATA[
     document.addEventListener('DOMContentLoaded', function() {
-        const projectNameElement = document.querySelector('#project-id');
+        const projectNameElement = document.querySelector('#project_identifier');
         if (!projectNameElement) return;
         const projectName = projectNameElement.textContent.trim();
+        console.log("Project identifier:", projectId);
 
         // Check if the current project is "Packeta"
         if (projectName === 'packeta') {
             // Append the link only for the "Packeta" project
+            console.log("Current project is packeta");
             $('p.other-formats').first().append('' +
                 '<% builder = RedmineXlsxFormatIssueExporter::OtherFormatsBuilder.new(self) %>' +
                 '<%= builder.link_to 'Munkalap', :url => params, :onclick => "showModal('xlsx-export-options', '350px'); return false;" %>'
