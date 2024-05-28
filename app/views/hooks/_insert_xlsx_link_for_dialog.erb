@@ -1,12 +1,12 @@
 <script type="text/javascript">
     //<![CDATA[
     document.addEventListener('DOMContentLoaded', function() {
-        const projectNameElement = document.querySelector('#project-name');
+        const projectNameElement = document.querySelector('#project-id');
         if (!projectNameElement) return;
         const projectName = projectNameElement.textContent.trim();
 
         // Check if the current project is "Packeta"
-        if (projectName === 'Packeta') {
+        if (projectName === 'packeta') {
             // Append the link only for the "Packeta" project
             $('p.other-formats').first().append('' +
                 '<% builder = RedmineXlsxFormatIssueExporter::OtherFormatsBuilder.new(self) %>' +
