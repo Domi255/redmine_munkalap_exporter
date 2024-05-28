@@ -1,8 +1,18 @@
 <script type="text/javascript">
     //<![CDATA[
-    $('p.other-formats').first().append('' +
-        <% builder = RedmineXlsxFormatIssueExporter::OtherFormatsBuilder.new(self) %>
-        '<%= builder.link_to 'Munkalap', :url => params, :onclick => "showModal('xlsx-export-options', '350px'); return false;" %>'
-    );
+    document.addEventListener('DOMContentLoaded', function() {
+        const projectNameElement = document.querySelector('#project-name');
+        if (!projectNameElement) return;
+        const projectName = projectNameElement.textContent.trim();
+
+        // Check if the current project is "Packeta"
+        if (projectName === 'Packeta') {
+            // Append the link only for the "Packeta" project
+            $('p.other-formats').first().append('' +
+                '<% builder = RedmineXlsxFormatIssueExporter::OtherFormatsBuilder.new(self) %>' +
+                '<%= builder.link_to 'Munkalap', :url => params, :onclick => "showModal('xlsx-export-options', '350px'); return false;" %>'
+            );
+        }
+    });
     //]]>
 </script>
