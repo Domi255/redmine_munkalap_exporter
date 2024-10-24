@@ -13,7 +13,7 @@ module RedmineXlsxFormatIssueExporter
       columns_width = []
     
       # Column headers
-      extra_headers = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido", "AutoMergeField"]
+      extra_headers = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
       headers =
         report.criteria.collect do |criteria|
           l_or_humanize(report.available_criteria[criteria][:label])
@@ -22,7 +22,9 @@ module RedmineXlsxFormatIssueExporter
       headers << l(:label_total_time)
       headers = extra_headers + headers
 
-    
+      if headers[extra_headers.size] == "#"
+        headers[extra_headers.size] = "New Header Name"
+      end
     
       start_period_index = headers.count
       worksheet.freeze_panes(1, start_period_index)  # Freeze header row and criteria column.
