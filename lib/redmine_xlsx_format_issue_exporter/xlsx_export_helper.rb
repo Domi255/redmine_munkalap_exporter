@@ -8,6 +8,8 @@ module RedmineXlsxFormatIssueExporter
   extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
+  copy_helper_column = columns[7]
+  columns[7] = "AutoMergeField"
 
   
     
@@ -24,6 +26,7 @@ module RedmineXlsxFormatIssueExporter
 
   # Write the header row with extra columns
   write_header_row(workbook, worksheet, columns, columns_width)
+  columns[7] = copy_helper_column
 
   # Write item rows with extra columns
   row_number = 2
@@ -40,7 +43,6 @@ end
 
 
     def write_header_row(workbook, worksheet, columns, columns_width)
-      columns[7] = "AutoMergeField"
       header_format = create_header_format(workbook)
       columns.each_with_index do |c, index|
         if c.class.name == 'String'
@@ -51,7 +53,7 @@ end
 
         worksheet.write(0, index, value, header_format)
         columns_width << get_column_width(value)
-        columns[7] = "#"
+        
       end
     end
 
