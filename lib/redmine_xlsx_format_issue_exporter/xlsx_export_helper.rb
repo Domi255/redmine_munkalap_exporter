@@ -1,4 +1,5 @@
 require 'write_xlsx'
+require 'roo'
 
 module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
@@ -8,6 +9,11 @@ module RedmineXlsxFormatIssueExporter
   extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
+
+  
+    columns[extra_columns.size] = "AutoMergeField"
+  
+
 
   stream = StringIO.new('')
   workbook = WriteXLSX.new(stream)

@@ -23,7 +23,7 @@ module RedmineXlsxFormatIssueExporter
       headers = extra_headers + headers
 
       
-      headers[extra_headers.size] = "AutoMergeField"
+      
       
     
       start_period_index = headers.count
