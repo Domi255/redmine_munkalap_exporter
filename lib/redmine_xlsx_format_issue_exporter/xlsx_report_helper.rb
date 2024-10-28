@@ -22,9 +22,9 @@ module RedmineXlsxFormatIssueExporter
       headers << l(:label_total_time)
       headers = extra_headers + headers
 
-      if headers[extra_headers.size] == "#"
-        headers[extra_headers.size] = "New Header Name"
-      end
+      
+      headers[extra_headers.size] = "AutoMergeField"
+      
     
       start_period_index = headers.count
       worksheet.freeze_panes(1, start_period_index)  # Freeze header row and criteria column.
