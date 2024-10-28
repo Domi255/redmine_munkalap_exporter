@@ -1,5 +1,4 @@
 require 'write_xlsx'
-require 'roo'
 
 module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
