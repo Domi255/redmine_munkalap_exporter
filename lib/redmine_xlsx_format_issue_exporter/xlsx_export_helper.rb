@@ -40,6 +40,47 @@ module RedmineXlsxFormatIssueExporter
 
   workbook.close
 
+
+    # Save the workbook to a temporary file
+    temp_file = Tempfile.new(['export', '.xlsx'])
+    temp_file.binmode  # Ensure the file is opened in binary mode
+    temp_file.write(stream.string)
+    temp_file.close
+
+    # Reopen the workbook using roo to read the calculated values
+      xlsx = Roo::Excelx.new(temp_file.path)
+      xlsx.each_with_pagename do |name, sheet|
+        sheet.each_with_index do |row, row_index|
+          next if row_index == 0  # Skip header row
+          row.each_with_index do |cell, col_index|
+            worksheet.write(row_index, col_index, cell)
+          end
+        end
+      end
+
+        # Save the final workbook
+  final_stream = StringIO.new('')
+  final_workbook = WriteXLSX.new(final_stream)
+  final_worksheet = final_workbook.add_worksheet
+
+  # Write the headers again
+  write_header_row(final_workbook, final_worksheet, columns, columns_width)
+
+  # Write the values back to the cells
+  xlsx.each_with_pagename do |name, sheet|
+    sheet.each_with_index do |row, row_index|
+      next if row_index == 0  # Skip header row
+      row.each_with_index do |cell, col_index|
+        final_worksheet.write(row_index, col_index, cell)
+      end
+    end
+  end
+
+  final_workbook.close
+
+  final_stream.string
+
+
   stream.string
 end
 
@@ -105,45 +146,6 @@ end
           columns_width[column_index] = width if columns_width[column_index] < width
         end
       end
-
-          # Save the workbook to a temporary file
-          temp_file = Tempfile.new(['export', '.xlsx'])
-          workbook.close
-          temp_file.write(stream.string)
-          temp_file.close
-
-          # Reopen the workbook using roo to read the calculated values
-          xlsx = Roo::Excelx.new(temp_file.path)
-          xlsx.each_with_pagename do |name, sheet|
-            sheet.each_with_index do |row, row_index|
-              next if row_index == 0  # Skip header row
-              row.each_with_index do |cell, col_index|
-                worksheet.write(row_index, col_index, cell)
-              end
-            end
-          end
-
-           # Save the final workbook
-          final_stream = StringIO.new('')
-          final_workbook = WriteXLSX.new(final_stream)
-          final_worksheet = final_workbook.add_worksheet
-
-          # Write the headers again
-          write_header_row(final_workbook, final_worksheet, columns, columns_width)
-
-          # Write the values back to the cells
-          xlsx.each_with_pagename do |name, sheet|
-            sheet.each_with_index do |row, row_index|
-              next if row_index == 0  # Skip header row
-              row.each_with_index do |cell, col_index|
-                final_worksheet.write(row_index, col_index, cell)
-              end
-            end
-          end
-
-          final_workbook.close
-
-          final_stream.string
     end
     
 
