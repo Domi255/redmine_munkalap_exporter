@@ -1,6 +1,7 @@
 require 'write_xlsx'
 require 'roo'
 require 'tempfile'
+require 'axlsx'
 
 module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
@@ -18,11 +19,9 @@ module RedmineXlsxFormatIssueExporter
   
 
 
-  stream = StringIO.new('')
-  workbook = WriteXLSX.new(stream)
-  worksheet = workbook.add_worksheet
-
-  worksheet.freeze_panes(1, 1)  # Freeze header row and # column.
+  p = Axlsx::Package.new
+  workbook = p.workbook
+  worksheet = workbook.add_worksheet(name: "Sheet1")
 
   columns_width = []
 
@@ -34,53 +33,45 @@ module RedmineXlsxFormatIssueExporter
   row_number = 2
   write_item_rows(workbook, worksheet, columns, items, columns_width)
 
-  columns.size.times do |index|
-    worksheet.set_column(index + 7, index + 7, columns_width[index])
-  end
+  
+ # Save the workbook to a temporary file
+ temp_file = Tempfile.new(['export', '.xlsx'])
+ p.serialize(temp_file.path)
+  
+ # Reopen the workbook using roo to read the calculated values
+ xlsx = Roo::Excelx.new(temp_file.path)
+ xlsx.each_with_pagename do |name, sheet|
+   sheet.each_with_index do |row, row_index|
+     next if row_index == 0  # Skip header row
+     row.each_with_index do |cell, col_index|
+       worksheet.add_cell(row_index, col_index, cell)
+     end
+   end
+ end
 
-  workbook.close
-
-
-    # Save the workbook to a temporary file
-    temp_file = Tempfile.new(['export', '.xlsx'])
-    temp_file.binmode  # Ensure the file is opened in binary mode
-    temp_file.write(stream.string)
-    temp_file.close
-
-    # Reopen the workbook using roo to read the calculated values
-      xlsx = Roo::Excelx.new(temp_file.path)
-      xlsx.each_with_pagename do |name, sheet|
-        sheet.each_with_index do |row, row_index|
-          next if row_index == 0  # Skip header row
-          row.each_with_index do |cell, col_index|
-            worksheet.write(row_index, col_index, cell)
-          end
-        end
-      end
-
-        # Save the final workbook
+    # Save the final workbook
   final_stream = StringIO.new('')
-  final_workbook = WriteXLSX.new(final_stream)
-  final_worksheet = final_workbook.add_worksheet
+  final_package = Axlsx::Package.new
+  final_workbook = final_package.workbook
+  final_worksheet = final_workbook.add_worksheet(name: "Sheet1")
+
 
   # Write the headers again
   columns[7] = "AutoMergeField"
-  write_header_row(final_workbook, final_worksheet, columns, columns_width)
+  write_header_row(final_worksheet, columns, columns_width)
 
-  # Write the values back to the cells
-  xlsx.each_with_pagename do |name, sheet|
-    sheet.each_with_index do |row, row_index|
-      next if row_index == 0  # Skip header row
-      row.each_with_index do |cell, col_index|
-        final_worksheet.write(row_index, col_index, cell)
-      end
+# Write the values back to the cells
+xlsx.each_with_pagename do |name, sheet|
+  sheet.each_with_index do |row, row_index|
+    next if row_index == 0  # Skip header row
+    row.each_with_index do |cell, col_index|
+      final_worksheet.add_cell(row_index, col_index, cell)
     end
   end
+end
 
-  final_workbook.close
-
+final_package.serialize(final_stream)
   final_stream.string
-
 
   
 end
