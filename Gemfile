@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'rubyzip'
+gem 'rubyzip', '~> 2.3'
 gem 'roo'
 gem 'axlsx'
