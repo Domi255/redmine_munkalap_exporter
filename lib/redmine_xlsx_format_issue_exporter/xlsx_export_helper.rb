@@ -1,3 +1,4 @@
+require 'zip'
 require 'axlsx'
 require 'roo'
 require 'tempfile'
