@@ -64,6 +64,7 @@ module RedmineXlsxFormatIssueExporter
   final_worksheet = final_workbook.add_worksheet
 
   # Write the headers again
+  columns[7] = "AutoMergeField"
   write_header_row(final_workbook, final_worksheet, columns, columns_width)
 
   # Write the values back to the cells
