@@ -10,7 +10,7 @@ module RedmineXlsxFormatIssueExporter
   columns = extra_columns + columns
 
   
-    columns[extra_columns.size] = "AutoMergeField"
+    
   
 
 
@@ -40,6 +40,7 @@ end
 
 
     def write_header_row(workbook, worksheet, columns, columns_width)
+      columns[7] = "AutoMergeField"
       header_format = create_header_format(workbook)
       columns.each_with_index do |c, index|
         if c.class.name == 'String'
@@ -50,6 +51,7 @@ end
 
         worksheet.write(0, index, value, header_format)
         columns_width << get_column_width(value)
+        columns[7] = "#"
       end
     end
 
