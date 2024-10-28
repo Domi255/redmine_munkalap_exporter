@@ -81,7 +81,7 @@ module RedmineXlsxFormatIssueExporter
   final_stream.string
 
 
-  stream.string
+  
 end
 
 
