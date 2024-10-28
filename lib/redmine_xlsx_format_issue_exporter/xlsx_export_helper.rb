@@ -1,7 +1,6 @@
-require 'write_xlsx'
+require 'axlsx'
 require 'roo'
 require 'tempfile'
-require 'axlsx'
 
 module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
