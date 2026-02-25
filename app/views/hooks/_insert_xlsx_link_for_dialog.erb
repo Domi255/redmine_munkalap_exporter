@@ -2,7 +2,7 @@
   //<![CDATA[
     $('p.other-formats').first().append('' +
       <% builder = RedmineXlsxFormatIssueExporter::OtherFormatsBuilder.new(self) %>
-      '<%= builder.link_to 'Munkalap', :url => params, :onclick => "showModal('xlsx-export-options', '350px'); return false;" %>'
+      '<%= builder.link_to 'xlsx', :url => params, :onclick => "showModal('xlsx-export-options', '350px'); return false;" %>'
     );
   //]]>
 </script>
