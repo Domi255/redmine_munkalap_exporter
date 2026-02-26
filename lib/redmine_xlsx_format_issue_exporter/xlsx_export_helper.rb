@@ -74,7 +74,7 @@ end
           
           custom_data = case column_index
           when 0
-            "=IF(OR(J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Posta POS SW\",J#{row_number}=\"Posta POS TMS\",J#{row_number}=\"Posta POS hibabejelentés (Digitran)\"),\"Digitran\",IF(OR(J#{row_number}=\"Posta POS csoport\",J#{row_number}=\"Posta POS MGMT\"),\"Posta\",IF(J#{row_number}=\"Posta POS BPC\",\"BPC\",\"\")))"
+            "=IF(OR(J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Naszlady János\",J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Posta POS SW\",J#{row_number}=\"Posta POS TMS\",J#{row_number}=\"Posta POS hibabejelentés (Digitran)\"),\"Digitran\",IF(OR(J#{row_number}=\"Posta POS csoport\",J#{row_number}=\"Posta POS MGMT\"),\"Posta\",IF(J#{row_number}=\"Posta POS BPC\",\"BPC\",\"\")))"
           when 1
             "=IF(OR(J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Naszlady János\",J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Posta POS SW\"),\"ArtOfInfo\",IF(J#{row_number}=\"Posta POS TMS\",\"SHZRT\",IF(OR(J#{row_number}=\"Posta POS hibabejelentés\",J#{row_number}=\"Posta POS hibabejelentés (Digitran)\"),\"Digitran\",\"\")))"
           end
