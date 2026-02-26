@@ -5,11 +5,11 @@ module RedmineXlsxFormatIssueExporter
 
     def query_to_xlsx(items, query, options={})
   columns = query.columns
-  extra_columns = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
+  extra_columns = ["felelős", "házon belül"]
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
-  copy_helper_column = columns[7]
-  columns[7] = "AutoMergeField"
+  copy_helper_column = columns[2]
+  columns[2] = "AutoMergeField"
 
   
     
@@ -26,14 +26,14 @@ module RedmineXlsxFormatIssueExporter
 
   # Write the header row with extra columns
   write_header_row(workbook, worksheet, columns, columns_width)
-  columns[7] = copy_helper_column
+  columns[2] = copy_helper_column
 
   # Write item rows with extra columns
   row_number = 2
   write_item_rows(workbook, worksheet, columns, items, columns_width)
 
   columns.size.times do |index|
-    worksheet.set_column(index + 7, index + 7, columns_width[index])
+    worksheet.set_column(index + 2, index + 2, columns_width[index])
   end
 
   workbook.close
@@ -61,9 +61,9 @@ end
       hyperlink_format = create_hyperlink_format(workbook)
       cell_format = create_cell_format(workbook)
       
-      # Skip the first 7 columns
-      custom_columns = columns[0..6]
-      original_columns = columns[7..-1] || []
+      # Skip the first 2 columns
+      custom_columns = columns[0..1]
+      original_columns = columns[2..-1] || []
       
 
       row_number = 1
@@ -73,20 +73,9 @@ end
           
           custom_data = case column_index
           when 0
-            
-            "=IF(AND(B#{row_number}=0,C#{row_number}=0,D#{row_number}=0,E#{row_number}=0,F#{row_number}=0,G#{row_number}=0),1,0)"
+            "alma"
           when 1
-            "=IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Ragasztó eltáv. oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW())=\"\",IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matrica típusa\",$1:$1,0),4),\"1\",\"\") & ROW())=\"bármelyik ragasztóeltávolítással\",INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matricázás oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()),),INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Ragasztó eltáv. oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()))"
-          when 2
-            "=IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Hátfal oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW())=\"\",IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matrica típusa\",$1:$1,0),4),\"1\",\"\") & ROW())=\"hát ragasztóeltávolítás nélkül\",INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matricázás oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()),),INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Hátfal oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()))"
-          when 3
-            "=IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Elő- és oldalfal oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW())=\"\",IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matrica típusa\",$1:$1,0),4),\"1\",\"\") & ROW())=\"elő és oldal ragasztóeltávolítás nélkül\",INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Matricázás oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()),),INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Elő- és oldalfal oszlopszám\",$1:$1,0),4),\"1\",\"\") & ROW()))"
-          when 4
-            "=INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Megérkezés km óraállás\",$1:$1,0),4),\"1\",\"\") & ROW())-INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Induló km óraállás\",$1:$1,0),4),\"1\",\"\") & ROW())+IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Hazaérkezés km óraállás\",$1:$1,0),4),\"1\",\"\") & ROW())>0,INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Hazaérkezés km óraállás\",$1:$1,0),4),\"1\",\"\") & ROW())-INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Induló km óraállás\",$1:$1,0),4),\"1\",\"\") & ROW()))-INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Kitérő hossza\",$1:$1,0),4),\"1\",\"\") & ROW())"
-          when 5
-            "=ROUNDUP((INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Megérkezés időpontja\",$1:$1,0),4),\"1\",\"\") & ROW())-INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Elindulás időpontja\",$1:$1,0),4),\"1\",\"\") & ROW()))*24*60-INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Kitérő ideje\",$1:$1,0),4),\"1\",\"\") & ROW())+IF(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Hazaérkezés időpontja\",$1:$1,0),4),\"1\",\"\") & ROW())<>\"\",(INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Hazaérkezés időpontja\",$1:$1,0),4),\"1\",\"\") & ROW())-INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Munkavégzés befejezése\",$1:$1,0),4),\"1\",\"\") & ROW()))*24*60),0)"
-          when 6
-            "=ROUNDUP((INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Munkavégzés befejezése\",$1:$1,0),4),\"1\",\"\") & ROW())-INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Megérkezés időpontja\",$1:$1,0),4),\"1\",\"\") & ROW()))*24*60,0)"
+            "körte"
           end
           
             write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)

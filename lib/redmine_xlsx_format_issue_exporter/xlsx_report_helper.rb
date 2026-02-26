@@ -13,7 +13,7 @@ module RedmineXlsxFormatIssueExporter
       columns_width = []
     
       # Column headers
-      extra_headers = ["nemkell", "rag_oszlop", "hat_oszlop", "elo_oszlop", "Teljes ut hossza", "Utido", "Munkaido"]
+      extra_headers = ["felelős", "házon belül"]
       headers =
         report.criteria.collect do |criteria|
           l_or_humanize(report.available_criteria[criteria][:label])
