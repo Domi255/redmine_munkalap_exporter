@@ -4,12 +4,13 @@ module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
 
     def query_to_xlsx(items, query, options={})
-  columns = query.columns
+  columns_to_delete = ["Szülő feladat", "Szülőfeladat tárgya", "Estimated remaining time", "Kategória", "Privát", "Presales", "Készültség (%)", "Összes becsült óra", "Becsült időigény"]
+  columns = query.columns.reject { |c| columns_to_delete.include?(c.caption.to_s) }
   extra_columns = ["felelős", "házon belül"]
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
   copy_helper_column = columns[2]
-  columns[2] = "#"
+  columns[2] = "AutoMergeField"
 
   
     
@@ -73,11 +74,9 @@ end
           
           custom_data = case column_index
           when 0
-            felelős_col = "INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Felelős\",$1:$1,0),4),\"1\",\"\") & ROW())"
-            "=IF(OR(#{felelős_col}=\"Székely Zsolt\",#{felelős_col}=\"Horváth Ferenc\",#{felelős_col}=\"Posta POS SW\",#{felelős_col}=\"Posta POS TMS\"),\"Digitran\",IF(OR(#{felelős_col}=\"Posta POS csoport\",#{felelős_col}=\"Posta POS MGMT\"),\"Posta\",IF(#{felelős_col}=\"Posta POS BPC\",\"BPC\",\"\")))"
+            "=IF(OR(J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Posta POS SW\",J#{row_number}=\"Posta POS TMS\"),\"Digitran\",IF(OR(J#{row_number}=\"Posta POS csoport\",J#{row_number}=\"Posta POS MGMT\"),\"Posta\",IF(J#{row_number}=\"Posta POS BPC\",\"BPC\",\"\")))"
           when 1
-            felelős_col = "INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Felelős\",$1:$1,0),4),\"1\",\"\") & ROW())"
-            "=IF(OR(#{felelős_col}=\"Horváth Ferenc\",#{felelős_col}=\"Naszlady János\",#{felelős_col}=\"Székely Zsolt\",#{felelős_col}=\"Posta POS SW\"),\"ArtOfInfo\",IF(#{felelős_col}=\"Posta POS TMS\",\"SHZRT\",IF(#{felelős_col}=\"Posta POS hibabejelentés\",\"Digitran\",\"\")))"
+            "=IF(OR(J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Naszlady János\",J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Posta POS SW\"),\"ArtOfInfo\",IF(J#{row_number}=\"Posta POS TMS\",\"SHZRT\",IF(J#{row_number}=\"Posta POS hibabejelentés\",\"Digitran\",\"\")))"
           end
           
             write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
