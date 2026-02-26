@@ -12,10 +12,8 @@ module RedmineXlsxFormatIssueExporter
   copy_helper_column = columns[2]
   columns[2] = "#"
 
-  
-    
-  
-
+  priority_order = ["Azonnali", "Sürgős", "Magas", "Normál", "Alacsony"]
+  items = items.sort_by { |item| priority_order.index(item.priority.name) || 999 }
 
   stream = StringIO.new('')
   workbook = WriteXLSX.new(stream)
