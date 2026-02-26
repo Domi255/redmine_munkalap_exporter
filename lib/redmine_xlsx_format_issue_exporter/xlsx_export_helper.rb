@@ -9,7 +9,7 @@ module RedmineXlsxFormatIssueExporter
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
   copy_helper_column = columns[2]
-  columns[2] = "AutoMergeField"
+  columns[2] = "#"
 
   
     
