@@ -4,7 +4,7 @@ module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
 
     def query_to_xlsx(items, query, options={})
-  columns_to_delete = ["Szülő feladat", "Szülőfeladat tárgya", "Estimated remaining time", "Kategória", "Privát", "Presales", "Készültség (%)", "Összes becsült óra", "Becsült időigény", "Cél verzió"]
+  columns_to_delete = ["Szülő feladat", "Szülőfeladat tárgya", "Estimated remaining time", "Kategória", "Privát", "Presales", "Készültség (%)", "Összes becsült óra", "Becsült időigény", "Cél verzió", "Befejezés dátuma"]
   columns = query.columns.reject { |c| columns_to_delete.include?(c.caption.to_s) }
   extra_columns = ["felelős", "házon belül"]
   extra_columns_size = extra_columns.size
@@ -74,9 +74,9 @@ end
           
           custom_data = case column_index
           when 0
-            "=IF(OR(J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Posta POS SW\",J#{row_number}=\"Posta POS TMS\"),\"Digitran\",IF(OR(J#{row_number}=\"Posta POS csoport\",J#{row_number}=\"Posta POS MGMT\"),\"Posta\",IF(J#{row_number}=\"Posta POS BPC\",\"BPC\",\"\")))"
+            "=IF(OR(J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Posta POS SW\",J#{row_number}=\"Posta POS TMS\",J#{row_number}=\"Posta POS hibabejelentés (Digitran)\"),\"Digitran\",IF(OR(J#{row_number}=\"Posta POS csoport\",J#{row_number}=\"Posta POS MGMT\"),\"Posta\",IF(J#{row_number}=\"Posta POS BPC\",\"BPC\",\"\")))"
           when 1
-            "=IF(OR(J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Naszlady János\",J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Posta POS SW\"),\"ArtOfInfo\",IF(J#{row_number}=\"Posta POS TMS\",\"SHZRT\",IF(J#{row_number}=\"Posta POS hibabejelentés\",\"Digitran\",\"\")))"
+            "=IF(OR(J#{row_number}=\"Horváth Ferenc\",J#{row_number}=\"Naszlady János\",J#{row_number}=\"Székely Zsolt\",J#{row_number}=\"Posta POS SW\"),\"ArtOfInfo\",IF(J#{row_number}=\"Posta POS TMS\",\"SHZRT\",IF(OR(J#{row_number}=\"Posta POS hibabejelentés\",J#{row_number}=\"Posta POS hibabejelentés (Digitran)\"),\"Digitran\",\"\")))"
           end
           
             write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
