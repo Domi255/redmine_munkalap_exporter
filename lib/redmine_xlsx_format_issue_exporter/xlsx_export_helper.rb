@@ -73,9 +73,11 @@ end
           
           custom_data = case column_index
           when 0
-            "alma"
+            felelős_col = "INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Felelős\",$1:$1,0),4),\"1\",\"\") & ROW())"
+            "=IF(OR(#{felelős_col}=\"Székely Zsolt\",#{felelős_col}=\"Horváth Ferenc\",#{felelős_col}=\"Posta POS SW\",#{felelős_col}=\"Posta POS TMS\"),\"Digitran\",IF(OR(#{felelős_col}=\"Posta POS csoport\",#{felelős_col}=\"Posta POS MGMT\"),\"Posta\",IF(#{felelős_col}=\"Posta POS BPC\",\"BPC\",\"\")))"
           when 1
-            "körte"
+            felelős_col = "INDIRECT(SUBSTITUTE(ADDRESS(1,MATCH(\"Felelős\",$1:$1,0),4),\"1\",\"\") & ROW())"
+            "=IF(OR(#{felelős_col}=\"Horváth Ferenc\",#{felelős_col}=\"Naszlady János\",#{felelős_col}=\"Székely Zsolt\",#{felelős_col}=\"Posta POS SW\"),\"ArtOfInfo\",IF(#{felelős_col}=\"Posta POS TMS\",\"SHZRT\",IF(#{felelős_col}=\"Posta POS hibabejelentés\",\"Digitran\",\"\")))"
           end
           
             write_item(worksheet, custom_data, item_index, column_index, cell_format, false, nil, hyperlink_format)
