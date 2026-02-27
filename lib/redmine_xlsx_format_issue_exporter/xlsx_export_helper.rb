@@ -6,7 +6,7 @@ module RedmineXlsxFormatIssueExporter
     def query_to_xlsx(items, query, options={})
   columns_to_delete = ["Szülő feladat", "Szülőfeladat tárgya", "Estimated remaining time", "Kategória", "Privát", "Total estimated time", "Presales", "Készültség (%)", "Összes becsült óra", "Becsült időigény", "Cél verzió", "Kezdés dátuma", "Megfigyelők", "Kapcsolódó feladatok", "Fájlok", "Parent task subject", "Befejezés dátuma"]
   columns = query.columns.reject { |c| columns_to_delete.include?(c.caption.to_s) }
-  extra_columns = ["felelős", "házon belül"]
+  extra_columns = ["Felelős cég", "DT-n belül"]
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
   copy_helper_column = columns[2]
