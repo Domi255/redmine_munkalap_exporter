@@ -22,7 +22,7 @@ module RedmineXlsxFormatIssueExporter
     "Befejezés dátuma", "Due date"
   ]
   columns = query.columns.reject { |c| columns_to_delete.include?(c.caption.to_s) }
-  extra_columns = ["felelős", "házon belül"]
+  extra_columns = ["Felelős cég", "DT-n belül"]
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
   copy_helper_column = columns[2]
