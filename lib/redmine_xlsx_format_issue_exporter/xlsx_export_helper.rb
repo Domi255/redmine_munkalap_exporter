@@ -4,9 +4,25 @@ module RedmineXlsxFormatIssueExporter
   module XlsxExportHelper
 
     def query_to_xlsx(items, query, options={})
-  columns_to_delete = ["Szülő feladat", "Szülőfeladat tárgya", "Estimated remaining time", "Kategória", "Privát", "Total estimated time", "Presales", "Készültség (%)", "Összes becsült óra", "Becsült időigény", "Cél verzió", "Kezdés dátuma", "Megfigyelők", "Kapcsolódó feladatok", "Fájlok", "Parent task subject", "Befejezés dátuma"]
+  columns_to_delete = [
+    "Szülő feladat", "Parent task",
+    "Szülőfeladat tárgya", "Parent task subject",
+    "Estimated remaining time",
+    "Kategória", "Category",
+    "Privát", "Private",
+    "Presales",
+    "Készültség (%)", "% Done",
+    "Összes becsült óra", "Total estimated time",
+    "Becsült időigény", "Estimated time",
+    "Cél verzió", "Target version",
+    "Kezdés dátuma", "Start date",
+    "Megfigyelők", "Watchers",
+    "Kapcsolódó feladatok", "Related issues",
+    "Fájlok", "Files",
+    "Befejezés dátuma", "Due date"
+  ]
   columns = query.columns.reject { |c| columns_to_delete.include?(c.caption.to_s) }
-  extra_columns = ["Felelős cég", "DT-n belül"]
+  extra_columns = ["felelős", "házon belül"]
   extra_columns_size = extra_columns.size
   columns = extra_columns + columns
   copy_helper_column = columns[2]
@@ -95,6 +111,19 @@ end
     
 
     def xlsx_content(column, item)
+      if column.name == :priority
+        priority_labels = {
+          "Sürgős"  => "4 - Sürgős",
+          "Magas"   => "3 - Magas",
+          "Normál"  => "2 - Normál",
+          "Alacsony" => "1 - Alacsony",
+          "Urgent"  => "4 - Sürgős",
+          "High"    => "3 - Magas",
+          "Normal"  => "2 - Normál",
+          "Low"     => "1 - Alacsony"
+        }
+        return priority_labels[item.priority.name] || item.priority.name
+      end
       csv_content(column, item)
     end
 
